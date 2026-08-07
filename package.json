@@ -1,0 +1,14 @@
+{
+  "name": "aws-devops-lab",
+  "version": "1.0.0",
+  "description": "My first AWS DevOps application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Ashan Wijekulasuriya",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
