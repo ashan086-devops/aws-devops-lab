@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: node-app
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+        mysql:
+         condition: service_healthy
+
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: password123
+      DB_NAME: devopsdb
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_DATABASE: devopsdb
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword123"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  mysql-data:
