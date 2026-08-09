@@ -13,10 +13,10 @@ services:
          condition: service_healthy
 
     environment:
-      DB_HOST: mysql
-      DB_USER: root
-      DB_PASSWORD: password123
-      DB_NAME: devopsdb
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
 
   mysql:
     image: mysql:8.0
