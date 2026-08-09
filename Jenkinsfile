@@ -15,10 +15,10 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running application tests...'
-            }
-        }
+    steps {
+        bat 'npm test'
+    }
+}
 
         stage('Docker Build') {
             steps {
