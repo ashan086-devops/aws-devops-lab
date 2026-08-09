@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+    stages {
 
         stage('Build') {
             steps {
@@ -9,16 +10,16 @@ pipeline {
         }
 
         stage('Test') {
-    steps {
-        bat 'npm test'
-    }
-}
+            steps {
+                bat 'npm test'
+            }
+        }
 
-stage('Terraform Check') {
-    steps {
-        bat 'terraform --version'
-    }
-}
+        stage('Terraform Check') {
+            steps {
+                bat 'terraform --version'
+            }
+        }
 
         stage('Docker Build') {
             steps {
