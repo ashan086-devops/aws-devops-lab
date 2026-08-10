@@ -15,9 +15,15 @@ pipeline {
             }
         }
 
-        stage('Terraform Check') {
+        stage('Terraform Init') {
             steps {
-                bat 'terraform --version'
+                bat 'terraform -chdir=terraform init -input=false'
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                bat 'terraform -chdir=terraform plan -input=false'
             }
         }
 
