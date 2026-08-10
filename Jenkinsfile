@@ -17,13 +17,29 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                bat 'terraform -chdir=terraform init -input=false'
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'aws-devops-credentials',
+                        usernameVariable: 'AWS_ACCESS_KEY_ID',
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    bat 'terraform -chdir=terraform init -input=false'
+                }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                bat 'terraform -chdir=terraform plan -input=false'
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'aws-devops-credentials',
+                        usernameVariable: 'AWS_ACCESS_KEY_ID',
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    bat 'terraform -chdir=terraform plan -input=false'
+                }
             }
         }
 
