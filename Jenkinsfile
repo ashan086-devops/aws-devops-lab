@@ -18,7 +18,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'aws-terraform',
+                    credentialsId: 'aws-devops-credentials',
                     usernameVariable: 'AWS_ACCESS_KEY_ID',
                     passwordVariable: 'AWS_SECRET_ACCESS_KEY'
                 )]) {
@@ -30,7 +30,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'aws-terraform',
+                    credentialsId: 'aws-devops-credentials',
                     usernameVariable: 'AWS_ACCESS_KEY_ID',
                     passwordVariable: 'AWS_SECRET_ACCESS_KEY'
                 )]) {
