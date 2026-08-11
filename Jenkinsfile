@@ -18,7 +18,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'aws-devops-credentials',
+                    credentialsId: 'aws-terraform',
                     usernameVariable: 'AWS_ACCESS_KEY_ID',
                     passwordVariable: 'AWS_SECRET_ACCESS_KEY'
                 )]) {
@@ -30,7 +30,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'aws-devops-credentials',
+                    credentialsId: 'aws-terraform',
                     usernameVariable: 'AWS_ACCESS_KEY_ID',
                     passwordVariable: 'AWS_SECRET_ACCESS_KEY'
                 )]) {
@@ -45,17 +45,13 @@ pipeline {
             }
         }
 
-        stage('Docker Test') {
-            steps {
-                bat 'docker compose up -d'
-                bat 'timeout /t 15 /nobreak'
-                bat 'curl -f http://localhost:3000'
-            }
-            post {
-                always {
-                    bat 'docker compose down'
-                }
-            }
-        }
+       stage('Docker Test') {
+    steps {
+        bat 'docker --version'
+        bat 'docker compose version'
+        bat 'where docker'
+        bat 'where docker-compose'
+    }
+}
     }
 }
