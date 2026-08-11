@@ -48,8 +48,7 @@ pipeline {
        stage('Docker Test') {
     steps {
         bat 'docker --version'
-        bat 'docker compose version'
-        bat 'where docker'
+        bat 'docker-compose --version'
         bat 'where docker-compose'
     }
 }
